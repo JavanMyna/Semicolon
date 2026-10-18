@@ -16,7 +16,7 @@
   --ckc111:#5B3FD6; --ckc111-t:#E8E3FB;
   --cca101:#0A7F76; --cca101-t:#D6F0ED;
   --cca102:#A8630A; --cca102-t:#FAE8C8;
-  --she103e:#B72A68; --she103e-t:#F9DCE8;
+  --she102:#B72A68; --she102-t:#F9DCE8;
   --plan:#5A6B8C; --plan-t:#E3E8F1;
   --lsp201:#1F6FB8; --lsp201-t:#DCEBFA;
   --lkm400:#3E7D1E; --lkm400-t:#E1F0D2;
@@ -33,7 +33,7 @@
     --ckc111:#A99BFF; --ckc111-t:#2A2450;
     --cca101:#4CD1C4; --cca101-t:#10312F;
     --cca102:#F2B050; --cca102-t:#3A2A0C;
-    --she103e:#F27BAA; --she103e-t:#3A1728;
+    --she102:#F27BAA; --she102-t:#3A1728;
     --plan:#9DB0D6; --plan-t:#222B40;
     --lsp201:#7DBBF5; --lsp201-t:#14293F;
     --lkm400:#A5D872; --lkm400-t:#1E3010;
@@ -45,7 +45,7 @@
   --ckc111:#A99BFF; --ckc111-t:#2A2450;
   --cca101:#4CD1C4; --cca101-t:#10312F;
   --cca102:#F2B050; --cca102-t:#3A2A0C;
-  --she103e:#F27BAA; --she103e-t:#3A1728;
+  --she102:#F27BAA; --she102-t:#3A1728;
   --plan:#9DB0D6; --plan-t:#222B40;
     --lsp201:#7DBBF5; --lsp201-t:#14293F;
     --lkm400:#A5D872; --lkm400-t:#1E3010;
@@ -58,7 +58,7 @@ a{color:inherit}
 .c-ckc111{--c:var(--ckc111);--t:var(--ckc111-t)}
 .c-cca101{--c:var(--cca101);--t:var(--cca101-t)}
 .c-cca102{--c:var(--cca102);--t:var(--cca102-t)}
-.c-she103e{--c:var(--she103e);--t:var(--she103e-t)}
+.c-she102{--c:var(--she102);--t:var(--she102-t)}
 .c-plan{--c:var(--plan);--t:var(--plan-t)}
 .c-lsp201{--c:var(--lsp201);--t:var(--lsp201-t)}
 .c-lkm400{--c:var(--lkm400);--t:var(--lkm400-t)}
@@ -332,7 +332,7 @@ var COURSES={
   lkm400:{code:'LKM400',name:'Bahasa Malaysia',units:2,who:[{n:'Madam Mazlina',e:'mazlina@usm.my',r:''}]},
   bengkel:{code:'Bengkel Siswa',name:'Student workshop (not a course)',who:[]}
 };
-var ORDER=['ckc111','cca101','cca102','she103e'];
+var ORDER=['ckc111','cca101','cca102','she102'];
 var EXTRA=['lsp201','lkm400'];
 var CHIPS=ORDER.concat(EXTRA,['bengkel']);
 var CCA101_NOTE='This time comes from a planner headed session 2025/2026. Confirm it on eLearning.';
@@ -402,7 +402,7 @@ var TOPICS={
   ['Memory: types, hierarchy, semiconductor memory, error coding'],
   ['Cache memory: mapping methods'],['Virtual memory: paging, address translation, segmentation'],
   ['Multiprocessor organisation: SIMD vs MIMD, shared memory'],['Exam preparation','rev']],
- she103e:[
+ she102:[
   ['Introduction to the course'],['Malaysian background: history, politics, culture, geography'],
   ['History and politics: Malaya before the colonial West'],['History and politics: the British colonial era'],
   ['History and politics: independence and the formation of Malaysia'],
@@ -410,13 +410,13 @@ var TOPICS={
   ['Mid-semester break','brk'],
   ['Language and communication in Malaysia'],['Arts and cultural heritage'],
   ['Presentations','pres'],['Presentations','pres'],['Presentations','pres'],
-  ['Self-study','self'],['Self-study','self'],['No SHE103E sessions planned','none']]
+  ['Self-study','self'],['Self-study','self'],['No she102 sessions planned','none']]
 };
 var TASKS={
  ckc111:{def:['Skim the section and its definitions before the lecture','Rework the lecture examples without looking','Attempt a practice set: easy, then medium, then hard','Log each mistake and what caused it']},
  cca101:{def:['Read or watch the chapter section','Type and run every example yourself','Finish the weekly programming practice','Rewrite one program from a blank file']},
  cca102:{def:['Preview the chapter before the lecture','Redraw the key diagrams and tables from memory','Do the tutorial questions','Make or review flashcards for new terms']},
- she103e:{def:['Read the assigned material','Write five key points in your own words','Spend 30 minutes on the assignment or presentation']}
+ she102:{def:['Read the assigned material','Write five key points in your own words','Spend 30 minutes on the assignment or presentation']}
 };
 var TASKSETS={
  brk:['Catch up on anything you fell behind on','Redo one old problem set or exercise','Read ahead one topic'],
@@ -450,7 +450,7 @@ var DEADLINES=[
  {course:'ckc111',title:'Tutorial coursework 2 due',week:13},
  {course:'ckc111',title:'Test 2 (topics 9 to 13)',week:14,note:'Exact day not stated in the planner.'},
  {course:'ckc111',title:'Final exam (3 hours)',weeks:[17,19],note:'Exam weeks. The exact date is not in the planner yet.'},
- {course:'she103e',title:'Presentations',weeks:[11,13],note:'Class slots on Tuesday 8, 15 and 22 December. Ask your lecturer when your turn is.'},
+ {course:'she102',title:'Presentations',weeks:[11,13],note:'Class slots on Tuesday 8, 15 and 22 December. Ask your lecturer when your turn is.'},
  {course:'all',title:'Deepavali (Sunday)',date:'2026-11-08',kind:'hol'},
  {course:'all',title:'Mid-semester break',week:8,kind:'hol'},
  {course:'all',title:'Convocation week',from:'2026-11-24',to:'2026-12-01',kind:'hol',note:'Listed in the CCA102 planner. Check whether classes still run.'},
@@ -458,22 +458,22 @@ var DEADLINES=[
  {course:'all',title:'New Year\u2019s Day',date:'2027-01-01',kind:'hol'}
 ];
 var TBC=[
- {course:'she103e',text:'Quiz (20%) covers the first topics of the course. No date is given yet.'},
- {course:'she103e',text:'Test (20%) is listed against weeks 5 to 7. No date is given yet.'},
- {course:'she103e',text:'Assignment (40%) is submitted through USM eLearning. No due date is given yet.'}
+ {course:'she102',text:'Quiz (20%) covers the first topics of the course. No date is given yet.'},
+ {course:'she102',text:'Test (20%) is listed against weeks 5 to 7. No date is given yet.'},
+ {course:'she102',text:'Assignment (40%) is submitted through USM eLearning. No due date is given yet.'}
 ];
 
 var MARKS=[
  {course:'ckc111',exam:60,examTxt:'60% (3 hours)',cw:40,cwTxt:'Tests 2 \u00d7 15%, tutorial coursework 2 \u00d7 5%'},
  {course:'cca101',exam:50,examTxt:'50% (2 hours)',cw:50,cwTxt:'Programming 30% (weekly practice about 6%, two timed assessments about 16%, one report about 8%), tests 2 \u00d7 10%'},
  {course:'cca102',exam:50,examTxt:'50% (2 hours)',cw:50,cwTxt:'Tests 2 \u00d7 10%, assignments 2 \u00d7 15%'},
- {course:'she103e',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Quiz 20%, test 20%, assignment 40%, presentation 20%'}
+ {course:'she102',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Quiz 20%, test 20%, assignment 40%, presentation 20%'}
 ];
 
 var RULES=[
  ['cca102','Attendance below 70% in classes and tutorials bars you from the final exam. A replacement test needs a valid medical certificate or an exemption letter.'],
  ['cca101','Missing three lectures or labs in a row without a reason can bar you from the final exam. Tests and timed assessments are in person only. Missing one scores 0 unless you hold an official medical certificate from Pusat Sejahtera, sent to both lecturers by the end of that day.'],
- ['she103e','Attendance is mandatory and a warning letter follows more than three absences. Every submission goes through USM eLearning.'],
+ ['she102','Attendance is mandatory and a warning letter follows more than three absences. Every submission goes through USM eLearning.'],
  ['ckc111','Reading assignments are given during the semester. Slides only appear on eLearning after each lecture is finished.'],
  ['all','Copying work, or letting yours be copied, is treated as plagiarism and can mean an F for the work or the whole coursework component.']
 ];
@@ -482,7 +482,7 @@ var HOW={
  ckc111:['This course has the largest study block because problem solving is learned by doing, not reading.','Before a lecture, skim the section headings and definitions for ten minutes.','On the same day, rework each lecture example without looking, then move to practice problems.','Attempt first, then use a hint, and only then read the full solution.','Keep an error log with a cause for each mistake: concept, calculation, notation, misread question. Revise from it before each test.','Tutorial coursework is 5% each. Start on the day it is released.'],
  cca101:['Programming is a skill you build with your hands, so type every example instead of reading it.','The 12 weekly practices add up to about 6%, and they are the training for the timed assessments.','Practise under a timer before each timed assessment. Write pseudocode first, then code.','Set up Lockdown Browser on your own laptop well before the first test on 3 November.','Use only what you learn in class. The policy bans vector, list, queue and other library containers.'],
  cca102:['Most of this course is diagrams, tables and conversions, so redraw them from memory.','Drill binary, decimal and hexadecimal conversions until they feel automatic.','Build the logic circuits from weeks 4 and 5 in a simulator instead of only reading them.','Use flashcards for terms and for the sequence of steps in fetch, decode, execute.','Assignments are worth 30% together. Read each brief the day it is released.'],
- she103e:['There is no final exam, so the whole grade comes from steady coursework.','Read for about an hour a week and write short notes in your own words.','Choose your presentation topic by week 6, before the break, so you can research it over the holiday.','Submit through eLearning and keep your attendance clean.']
+ she102:['There is no final exam, so the whole grade comes from steady coursework.','Read for about an hour a week and write short notes in your own words.','Choose your presentation topic by week 6, before the break, so you can research it over the holiday.','Submit through eLearning and keep your attendance clean.']
 };
 
 var RES={
@@ -515,7 +515,7 @@ var RES={
   {t:'IEEE 754 float converter',u:'https://www.h-schmidt.net/FloatConverter/IEEE754.html',k:'Tool',n:'See how a decimal number is stored as a floating-point value.'},
   {t:'MIT OpenCourseWare 6.004 Computation Structures',u:'https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/',k:'Course',n:'Deeper coverage of logic, instruction sets, pipelining, caches and virtual memory.'}
  ]},
- she103e:{note:'Your planner lists Sivachandralingam Sundara Raja et al., Malaysian Studies: History, Society, and Politics as the main reference.',items:[
+ she102:{note:'Your planner lists Sivachandralingam Sundara Raja et al., Malaysian Studies: History, Society, and Politics as the main reference.',items:[
   {t:'UNESCO Intangible Cultural Heritage: Malaysia',u:'https://ich.unesco.org/en/state/malaysia-MY',k:'Reference',n:'Malaysian elements on UNESCO lists. Ideal material for the heritage outcome and your presentation.',start:1},
   {t:'UNESCO World Heritage: Malaysia',u:'https://whc.unesco.org/en/statesparties/my',k:'Reference',n:'Malaysia\u2019s World Heritage sites with descriptions and photos.'},
   {t:'Britannica: Malaysia',u:'https://www.britannica.com/place/Malaysia',k:'Reference',n:'A readable overview of geography, history, government and people.'},
