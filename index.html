@@ -6,7 +6,7 @@
 <title>Semester 1 timetable and study plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=Righteous&display=swap" rel="stylesheet">
 <style>
 :root{
   box-sizing:border-box;
@@ -18,9 +18,14 @@
   --cca102:#A8630A; --cca102-t:#FAE8C8;
   --she103e:#B72A68; --she103e-t:#F9DCE8;
   --plan:#5A6B8C; --plan-t:#E3E8F1;
+  --lsp201:#1F6FB8; --lsp201-t:#DCEBFA;
+  --lkm400:#3E7D1E; --lkm400-t:#E1F0D2;
+  --bengkel:#8C4A2F; --bengkel-t:#F3E3DA;
   --hour:52px;
   --display:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;
   --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --logo:'Righteous','Trebuchet MS',system-ui,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -30,6 +35,9 @@
     --cca102:#F2B050; --cca102-t:#3A2A0C;
     --she103e:#F27BAA; --she103e-t:#3A1728;
     --plan:#9DB0D6; --plan-t:#222B40;
+    --lsp201:#7DBBF5; --lsp201-t:#14293F;
+    --lkm400:#A5D872; --lkm400-t:#1E3010;
+    --bengkel:#DBA283; --bengkel-t:#34211A;
   }
 }
 :root[data-theme="dark"]{
@@ -39,6 +47,9 @@
   --cca102:#F2B050; --cca102-t:#3A2A0C;
   --she103e:#F27BAA; --she103e-t:#3A1728;
   --plan:#9DB0D6; --plan-t:#222B40;
+    --lsp201:#7DBBF5; --lsp201-t:#14293F;
+    --lkm400:#A5D872; --lkm400-t:#1E3010;
+    --bengkel:#DBA283; --bengkel-t:#34211A;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
@@ -49,6 +60,9 @@ a{color:inherit}
 .c-cca102{--c:var(--cca102);--t:var(--cca102-t)}
 .c-she103e{--c:var(--she103e);--t:var(--she103e-t)}
 .c-plan{--c:var(--plan);--t:var(--plan-t)}
+.c-lsp201{--c:var(--lsp201);--t:var(--lsp201-t)}
+.c-lkm400{--c:var(--lkm400);--t:var(--lkm400-t)}
+.c-bengkel{--c:var(--bengkel);--t:var(--bengkel-t)}
 .c-all{--c:var(--muted);--t:var(--line)}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
@@ -183,12 +197,36 @@ table.marks th{font:700 .9rem var(--display);background:var(--bg)}
 .res .k{font-size:.78rem;font-weight:700;color:var(--c);margin-right:6px}
 .res .start{font-size:.74rem;font-weight:700;background:var(--ink);color:var(--bg);padding:1px 8px;border-radius:99px;margin-left:6px}
 .res p{margin:6px 0 0;font-size:.88rem;color:var(--muted)}
-.foot{margin-top:36px;font-size:.85rem;color:var(--muted);max-width:75ch}
+.corner{display:flex;justify-content:flex-end;align-items:center;gap:26px;margin:-8px 0 14px}
+.mycsd{font:400 1.2rem/1 var(--logo);letter-spacing:.03em;text-decoration:none;padding:6px 2px;border-bottom:2px solid transparent}
+.mycsd:hover{border-bottom-color:var(--focus)}
+.credit-btn{font:700 .95rem/1 var(--mono);padding:7px 10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.credit-btn:hover{border-color:var(--ink)}
+dialog.credits{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:0;width:min(420px,calc(100vw - 32px));box-shadow:0 18px 50px rgba(0,0,0,.3)}
+dialog.credits::backdrop{background:rgba(10,14,24,.55)}
+.credits-in{padding:22px 24px 20px}
+.credits-in h2{margin:0 0 12px}
+.credits-in p{margin:8px 0}
+.credits-in a{font-weight:600;color:var(--focus)}
+.credits-in .btn{margin-top:12px}
+.untimed{margin-top:10px}
+.untimed:empty{display:none}
+.untimed div{border:1.5px dashed var(--c);border-left:4px solid var(--c);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:.88rem}
+@media (max-width:719px){.untimed{display:none}}
+.foot{margin:40px 0 0;padding-top:22px;border-top:1px solid var(--line);max-width:75ch}
+.foot figure{margin:0}
+.foot blockquote{margin:0;font:600 1.1rem/1.45 var(--display)}
+.foot .by{margin:6px 0 0;font-size:.85rem;color:var(--muted)}
+.foot .again{margin-top:12px;font-size:.82rem;padding:6px 12px}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="corner" aria-label="Links">
+    <a class="mycsd" href="https://mycsd.javanmyna.fyi" target="_blank" rel="noopener noreferrer">myCSD</a>
+    <button class="credit-btn" id="credit-open" type="button" aria-haspopup="dialog" aria-label="Credits" title="Credits">&lt;.</button>
+  </nav>
   <header class="top">
     <div>
       <h1>Semester 1 timetable and study plan</h1>
@@ -210,12 +248,13 @@ table.marks th{font:700 .9rem var(--display);background:var(--bg)}
     <div class="controls">
       <div class="chips" data-chips></div>
       <label class="toggle"><input type="checkbox" id="tg-study"> Show suggested study blocks</label>
-      <label class="toggle"><input type="checkbox" id="tg-opt" checked> Show Tuesday common lab</label>
+      <label class="toggle"><input type="checkbox" id="tg-opt"> Show Tuesday common lab</label>
     </div>
     <div class="tt-scroll" id="grid"></div>
+    <div class="untimed" id="untimed"></div>
     <div class="agenda" id="agenda"></div>
     <div class="detail" id="detail" aria-live="polite"></div>
-    <p class="legend">Solid blocks are classes. Dashed blocks are optional or suggested. Select a block for venue and notes.</p>
+    <p class="legend">Solid blocks are classes. Dashed blocks are optional or suggested. Select a block for venue and notes. Classes with no time yet are listed under the grid.</p>
     <div class="courses" id="courses"></div>
   </section>
 
@@ -252,8 +291,20 @@ table.marks th{font:700 .9rem var(--display);background:var(--bg)}
     <div id="res"></div>
   </section>
 
-  <p class="foot">Built from your four course planners. Where a planner is missing something (a venue, a date), the page says so rather than guessing. External links open other sites and may move over time.</p>
+  <footer class="foot">
+    <figure><blockquote id="quote" aria-live="polite"></blockquote><figcaption class="by" id="quote-by"></figcaption></figure>
+    <button class="btn again" id="quote-new" type="button">Another one</button>
+  </footer>
 </div>
+
+<dialog class="credits" id="credits" aria-labelledby="credits-title">
+  <div class="credits-in">
+    <h2 id="credits-title">Credits</h2>
+    <p>This timetable and study plan was originally made by <a href="https://github.com/baswarahm" target="_blank" rel="noopener noreferrer">Baswara</a>.</p>
+    <p class="muted">Forked from <a href="https://github.com/baswarahm/sms1" target="_blank" rel="noopener noreferrer">baswarahm/sms1</a>.</p>
+    <form method="dialog"><button class="btn">Close</button></form>
+  </div>
+</dialog>
 
 <script>
 (function(){
@@ -275,16 +326,21 @@ var COURSES={
   cca102:{code:'CCA102',name:'Computer Organisation',units:3,
     who:[{n:'Dr. Nursakirah Ab Rahman Muton',e:'nursakirah.arm@usm.my',r:'Room 627'},
          {n:'Assoc. Prof. Dr. Cheah Yu-N',e:'yncheah@usm.my',r:'Room 733'}]},
-  she103e:{code:'SHE103E',name:'Malaysian Citra 1',units:2,
-    who:[{n:'Dr. Sharifah Zahhura Syed Abdullah',e:'zahhura@usm.my',r:''}]}
+  she102:{code:'SHE102',name:'Malaysian Citra 1',units:2,
+    who:[{n:'Dr. Mohd Khairuddin Bin Mohad Sallehuddi',e:'m.khairuddin@usm.my',r:''}]},
+  lsp201:{code:'LSP201',name:'English',units:2,who:[{n:'Sir Mazlan',e:'mazlan@usm.my',r:''}]},
+  lkm400:{code:'LKM400',name:'Bahasa Malaysia',units:2,who:[{n:'Madam Mazlina',e:'mazlina@usm.my',r:''}]},
+  bengkel:{code:'Bengkel Siswa',name:'Student workshop (not a course)',who:[]}
 };
 var ORDER=['ckc111','cca101','cca102','she103e'];
+var EXTRA=['lsp201','lkm400'];
+var CHIPS=ORDER.concat(EXTRA,['bengkel']);
 var CCA101_NOTE='This time comes from a planner headed session 2025/2026. Confirm it on eLearning.';
 
 var BLOCKS=[
   {id:'b1',course:'ckc111',kind:'Lecture',day:0,s:'10:00',e:'12:00',venue:'DK G31',note:'Dr. Siti Hazyanti teaches weeks 1 to 7 and Assoc. Prof. Chew teaches weeks 9 to 15.'},
   {id:'b2',course:'cca101',kind:'Lecture',day:0,s:'12:00',e:'12:50',venue:'DK G31',note:CCA101_NOTE},
-  {id:'b3',course:'she103e',kind:'Lecture',day:1,s:'09:00',e:'11:00',venue:'DTSP',note:'No tutorial slot is listed for this course.'},
+  {id:'b3',course:'she102',kind:'Lecture',day:1,s:'09:00',e:'11:00',venue:'DTSP',note:'No tutorial slot is listed for this course.'},
   {id:'b4',course:'cca102',kind:'Lecture',day:1,s:'14:00',e:'15:00',venue:'DK G31',note:''},
   {id:'b5',course:'cca101',kind:'Common lab',opt:true,day:1,s:'17:00',e:'19:00',venue:'DK G31',note:''+CCA101_NOTE},
   {id:'b6',course:'cca102',kind:'Tutorial',day:2,s:'11:00',e:'12:00',venue:'Lab 5',note:'Group A tutorial.'},
@@ -292,17 +348,24 @@ var BLOCKS=[
   {id:'b8',course:'cca102',kind:'Lecture',day:3,s:'09:00',e:'10:00',venue:'DK G31',note:''},
   {id:'b9',course:'ckc111',kind:'Tutorial',day:3,s:'12:00',e:'12:50',venue:'ELL',note:'Group A tutorial.'},
   {id:'b10',course:'cca101',kind:'Lab',day:4,s:'15:00',e:'17:00',venue:'Lab 4',note:'Group A two-hour lab. The planner also mentions a one-hour tutorial but gives no separate time. '+CCA101_NOTE},
+  /* extra classes, not in the original planner */
+  {id:'x1',course:'lsp201',kind:'Class',day:0,s:'16:00',e:'17:00',venue:'Online (Webex or WhatsApp)',note:'This class is online, not on campus.'},
+  {id:'x2',course:'lsp201',kind:'Class',day:3,s:'15:00',e:'16:50',venue:'G03/119',note:''},
+  {id:'x3',course:'bengkel',kind:'Session',day:2,s:'15:00',e:'17:00',venue:'DK G31',note:'Not a course class.'},
+  {id:'x4',course:'lkm400',kind:'Class',day:2,s:'08:00',e:'09:50',venue:'G03/111',note:''},
   /* suggested study blocks */
   {id:'s1',course:'ckc111',kind:'Study',day:0,s:'14:00',e:'16:00',label:'Rework the lecture examples, then start problems'},
   {id:'s2',course:'cca102',kind:'Study',day:1,s:'15:30',e:'17:00',label:'Review the lecture and redraw the diagrams'},
-  {id:'s3',course:'cca101',kind:'Study',day:2,s:'15:30',e:'17:30',label:'Code along: type and run every example'},
+  {id:'s3',course:'cca101',kind:'Study',day:2,s:'17:30',e:'19:30',label:'Code along: type and run every example'},
   {id:'s4',course:'ckc111',kind:'Study',day:3,s:'10:30',e:'12:00',label:'Practice set before the tutorial'},
-  {id:'s5',course:'she103e',kind:'Study',day:3,s:'14:00',e:'15:00',label:'Reading and assignment work'},
+  {id:'s5',course:'she102',kind:'Study',day:3,s:'14:00',e:'15:00',label:'Reading and assignment work'},
   {id:'s6',course:'ckc111',kind:'Study',day:4,s:'09:30',e:'11:30',label:'Mixed practice and error log'},
   {id:'s7',course:'cca102',kind:'Study',day:4,s:'12:30',e:'14:00',label:'Tutorial questions and flashcards'},
   {id:'s8',course:'cca101',kind:'Study',day:5,s:'10:00',e:'12:00',label:'Weekly programming practice'},
   {id:'s9',course:'plan',kind:'Study',day:6,s:'20:00',e:'21:00',label:'Tick off the week and plan the next one'}
 ];
+/* classes with a day and venue but no time yet: move to BLOCKS once the time is known */
+var UNTIMED=[];
 
 var TOPICS={
  ckc111:[
@@ -365,15 +428,18 @@ var TASKSETS={
 
 /* deadlines: date, from/to, week, weeks */
 var DEADLINES=[
- {course:'cca101',title:'Test 1',date:'2026-11-03',note:'A Tuesday, which is not a usual class day. Check the time and venue. In person only.'},
+ {course:'cca101',title:'Test 1, 5:00 to 7:00 PM, DUP C',date:'2026-11-03',note:'A Tuesday, which is not a usual class day. In person only.'},
  {course:'cca101',title:'Report-based programming assessment released',date:'2026-11-10'},
- {course:'cca101',title:'Timed programming assessment 1',date:'2026-11-11',note:'In person, on your own laptop with Lockdown Browser installed.'},
+ {course:'cca101',title:'Timed programming assessment 1, 5:00 to 7:00 PM, DUP C',date:'2026-11-10',note:'In person, on your own laptop with Lockdown Browser installed.'},
  {course:'cca101',title:'Report-based programming assessment due',date:'2026-12-13',note:'Late work needs prior approval and gets a penalty.'},
- {course:'cca101',title:'Test 2',date:'2026-12-30'},
- {course:'cca101',title:'Timed programming assessment 2',date:'2027-01-06'},
+ {course:'cca101',title:'Test 2, 3:30 to 4:30 PM, DUP C',date:'2026-12-30'},
+ {course:'cca101',title:'Timed programming assessment 2, 3:30 to 5:30 PM, DUP C',date:'2027-01-06'},
  {course:'cca102',title:'Assignment 1 released',week:2},
  {course:'cca102',title:'Assignment 1 due',week:6},
- {course:'cca102',title:'Test 1, 9:30 to 10:30 AM',date:'2026-11-12',note:'Venue to be decided. The planner says Friday 12 November, but 12 November 2026 is a Thursday. Confirm the day with your lecturer.'},
+  /* HIDDEN NOTE, please do not "fix" this: the CCA102 Test 1 date was changed from the original planner
+     (which said 12 Nov 2026) to Thursday 5 Nov 2026, 8:30 to 9:30 AM, at DUP C (245 students).
+     The lecturer and the students agreed on this, so 5 Nov is correct. */
+  {course:'cca102',title:'Test 1, 8:30 to 9:30 AM, DUP C',date:'2026-11-05'},
  {course:'cca102',title:'Assignment 2 released',week:10},
  {course:'cca102',title:'Assignment 2 due',week:14},
  {course:'cca102',title:'Test 2',week:15},
@@ -487,7 +553,7 @@ DEADLINES.forEach(function(it){
 DEADLINES.sort(function(a,b){return a.start-b.start||a.end-b.end;});
 
 /* ---------- state ---------- */
-var state={tab:'timetable',hidden:{},study:false,opt:true,sel:null,week:1};
+var state={tab:'timetable',hidden:{},study:false,opt:false,sel:null,week:1};
 var progress={};
 try{progress=JSON.parse(localStorage.getItem('sem1-progress')||'{}')||{};}catch(e){progress={};}
 function saveProgress(){try{localStorage.setItem('sem1-progress',JSON.stringify(progress));}catch(e){}}
@@ -530,7 +596,7 @@ function renderNext(){
 
 /* ---------- chips ---------- */
 function renderChips(){
-  var html=ORDER.map(function(c){
+  var html=CHIPS.map(function(c){
     return '<button class="chip c-'+c+'" data-c="'+c+'" aria-pressed="'+(state.hidden[c]?'false':'true')+'"><span class="sw"></span>'+COURSES[c].code+'</button>';
   }).join('');
   document.querySelectorAll('[data-chips]').forEach(function(n){n.innerHTML=html;});
@@ -570,17 +636,20 @@ function renderGrid(){
   html+='</div>';
   document.getElementById('grid').innerHTML=html;
 }
+function untimedFor(d){return UNTIMED.filter(function(u){return u.day===d&&!state.hidden[u.course];});}
 function renderAgenda(){
   var list=visible(),html='',d;
   for(d=0;d<7;d++){
     var items=list.filter(function(b){return b.day===d;}).sort(function(a,b){return mins(a.s)-mins(b.s);});
-    if(d>4&&!items.length)continue;
+    var un=untimedFor(d);
+    if(d>4&&!items.length&&!un.length)continue;
     html+='<h3>'+DAYFULL[d]+'</h3>';
-    if(!items.length){html+='<p class="muted">No classes.</p>';continue;}
+    if(!items.length&&!un.length){html+='<p class="muted">No classes.</p>';continue;}
     items.forEach(function(b){
       var study=b.kind==='Study';
       html+='<div class="ag c-'+b.course+(study?' study':'')+(b.opt?' opt':'')+'"><div class="tm">'+hm(b.s)+'\u2013'+hm(b.e)+'</div><div><b>'+cname(b.course)+' '+(study?'study':b.kind.toLowerCase())+'</b><small>'+esc(study?b.label:b.venue)+'</small>'+(!study&&b.note?'<small>'+esc(b.note)+'</small>':'')+'</div></div>';
     });
+    un.forEach(function(u){html+='<div class="ag c-'+u.course+'"><div class="tm">Time not set</div><div><b>'+cname(u.course)+' '+u.kind.toLowerCase()+'</b><small>'+esc(u.venue)+'</small></div></div>';});
   }
   document.getElementById('agenda').innerHTML=html;
 }
@@ -594,19 +663,23 @@ function renderDetail(){
   if(b.kind==='Study'){
     html='<h3>Study: '+cname(b.course)+(c?' '+esc(c.name):'')+'</h3><p>'+DAYFULL[b.day]+', '+hm(b.s)+' to '+hm(b.e)+'</p><p>'+esc(b.label)+'</p><p class="muted">A suggestion, not a fixed slot. Move it to whatever suits you.</p>';
   }else{
-    html='<h3>'+c.code+' '+esc(c.name)+'</h3><p><b>'+b.kind+'</b>, '+DAYFULL[b.day]+', '+hm(b.s)+' to '+hm(b.e)+'</p><p>Venue: '+esc(b.venue)+'</p>'+(b.note?'<p class="muted">'+esc(b.note)+'</p>':'')+'<p class="muted">Taught by '+c.who.map(function(w){return esc(w.n);}).join(' and ')+'</p>';
+    html='<h3>'+c.code+' '+esc(c.name)+'</h3><p><b>'+b.kind+'</b>, '+DAYFULL[b.day]+', '+hm(b.s)+' to '+hm(b.e)+'</p><p>Venue: '+esc(b.venue)+'</p>'+(b.note?'<p class="muted">'+esc(b.note)+'</p>':'')+(c.who.length?'<p class="muted">Taught by '+c.who.map(function(w){return esc(w.n);}).join(' and ')+'</p>':'');
   }
   el.innerHTML=html;
 }
 function renderCourses(){
-  document.getElementById('courses').innerHTML=ORDER.map(function(k){
+  document.getElementById('courses').innerHTML=ORDER.concat(EXTRA).map(function(k){
     var c=COURSES[k];
-    return '<article class="course c-'+k+'"><h3>'+c.code+'<span>'+esc(c.name)+', '+c.units+' units</span></h3><ul>'+c.who.map(function(w){
-      return '<li>'+esc(w.n)+(w.note?' ('+w.note+')':'')+'<br><a href="mailto:'+w.e+'">'+w.e+'</a>'+(w.r?', '+w.r:'')+'</li>';
+    return '<article class="course c-'+k+'"><h3>'+c.code+'<span>'+esc(c.name)+(c.units?', '+c.units+' units':'')+'</span></h3><ul>'+c.who.map(function(w){
+      return '<li>'+esc(w.n)+(w.note?' ('+w.note+')':'')+(w.e?'<br><a href="mailto:'+w.e+'">'+w.e+'</a>'+(w.r?', '+w.r:''):'<br><span class="muted">Contact details not added yet</span>')+'</li>';
     }).join('')+'</ul></article>';
   }).join('');
 }
-function renderTimetable(){renderGrid();renderAgenda();renderDetail();}
+function renderUntimed(){
+  var items=UNTIMED.filter(function(u){return !state.hidden[u.course];});
+  document.getElementById('untimed').innerHTML=items.map(function(u){return '<div class="c-'+u.course+'"><b>'+cname(u.course)+'</b> '+DAYFULL[u.day]+', '+esc(u.venue)+'. Time not set yet.</div>';}).join('');
+}
+function renderTimetable(){renderGrid();renderAgenda();renderDetail();renderUntimed();}
 
 /* ---------- weekly plan ---------- */
 function deadlinesForWeek(w){
@@ -749,7 +822,74 @@ document.getElementById('week').addEventListener('change',function(e){
   saveProgress();updateWeekCount();
 });
 
+/* ---------- credits ---------- */
+function initCredits(){
+  var dlg=document.getElementById('credits');
+  document.getElementById('credit-open').addEventListener('click',function(){if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');});
+  dlg.addEventListener('click',function(e){if(e.target===dlg){if(dlg.close)dlg.close();else dlg.removeAttribute('open');}});
+}
+
+/* ---------- footer quotes: a built-in pool, sometimes swapped for an online one ---------- */
+var QUOTES=[
+ ['Nobody is coming to remind you to study. From now on, that is your job.',''],
+ ['Four years sounds long. It is eight semesters, and you are standing in the first one.',''],
+ ['Every skipped lecture is a debt, and exams collect with interest.',''],
+ ['Motivation is a mood. Discipline is what is left when the mood leaves.',''],
+ ['Your phone will not feel guilty when your CGPA drops.',''],
+ ['The exam does not care that you meant to study.',''],
+ ['Someone sacrificed something to put you in that lecture hall. Do not waste the seat.',''],
+ ['Being busy is not the same as making progress.',''],
+ ['Procrastination is a loan from tomorrow’s you, and tomorrow’s you pays double.',''],
+ ['You do not need to feel ready. You need to open the book.',''],
+ ['Attendance is the cheapest marks you will ever earn. Some courses bar you from the final if you skip it.',''],
+ ['Semester 1 sets the habits for the other seven.',''],
+ ['Nobody remembers the hours you scrolled. The hours you practised show up in your results.',''],
+ ['Your classmates are not your competition. Your own excuses are.',''],
+ ['Understanding it in the lecture and doing it alone in the exam are two different skills.',''],
+ ['The deadline you ignore today becomes the all-nighter you regret next week.',''],
+ ['A degree opens the door. What you build while you are here decides what is behind it.',''],
+ ['It is not that we have a short time to live, but that we waste a lot of it.','Seneca'],
+ ['Genius is one percent inspiration and ninety-nine percent perspiration.','Thomas Edison'],
+ ['Waste no more time arguing about what a good man should be. Be one.','Marcus Aurelius'],
+ ['A journey of a thousand miles begins with a single step.','Lao Tzu'],
+ ['Sedikit demi sedikit, lama-lama menjadi bukit. (Little by little, a hill is built.)','Malay proverb'],
+ ['Berakit-rakit ke hulu, berenang-renang ke tepian; bersakit-sakit dahulu, bersenang-senang kemudian. (Hardship first, ease later.)','Malay pantun']
+];
+var lastQ=-1,qBusy=false;
+function pickLocal(){var i;do{i=Math.floor(Math.random()*QUOTES.length);}while(i===lastQ);lastQ=i;return {t:QUOTES[i][0],a:QUOTES[i][1]};}
+function showQuote(q){
+  document.getElementById('quote').textContent='\u201C'+q.t+'\u201D';
+  document.getElementById('quote-by').textContent=q.a?'\u2014 '+q.a+(q.src?', '+q.src:''):'';
+}
+function fetchOnline(){
+  return new Promise(function(res,rej){
+    if(!window.fetch||!window.AbortController){rej();return;}
+    var ctl=new AbortController(),timer=setTimeout(function(){ctl.abort();},4000);
+    fetch('https://dummyjson.com/quotes/random',{signal:ctl.signal,cache:'no-store'}).then(function(r){
+      if(!r.ok)throw new Error('bad');return r.json();
+    }).then(function(j){
+      clearTimeout(timer);
+      if(!j||typeof j.quote!=='string'||j.quote.length>240)throw new Error('bad');
+      res({t:j.quote,a:j.author||'',src:'via DummyJSON'});
+    }).catch(function(){clearTimeout(timer);rej();});
+  });
+}
+function initQuotes(){
+  var btn=document.getElementById('quote-new');
+  showQuote(pickLocal());
+  if(Math.random()<0.5)fetchOnline().then(showQuote,function(){});
+  btn.addEventListener('click',function(){
+    if(qBusy)return;
+    if(Math.random()<0.5){
+      qBusy=true;btn.disabled=true;
+      fetchOnline().then(showQuote,function(){showQuote(pickLocal());}).then(function(){qBusy=false;btn.disabled=false;});
+    }else showQuote(pickLocal());
+  });
+}
+
 /* ---------- init ---------- */
+document.getElementById('tg-opt').checked=state.opt;document.getElementById('tg-study').checked=state.study;
+initCredits();initQuotes();
 renderHeader();renderNext();renderChips();renderTimetable();renderCourses();
 initWeekSelect();renderWeek();renderHow();
 renderMarks();renderDeadlines();renderRules();renderRes();
