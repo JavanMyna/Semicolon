@@ -328,8 +328,8 @@ var COURSES={
          {n:'Assoc. Prof. Dr. Cheah Yu-N',e:'yncheah@usm.my',r:'Room 733'}]},
   she102:{code:'SHE102',name:'Malaysian Citra 1',units:2,
     who:[{n:'Dr. Mohd Khairuddin Bin Mohad Sallehuddi',e:'m.khairuddin@usm.my',r:''}]},
-  lsp201:{code:'LSP201',name:'English',units:2,who:[{n:'Sir Mazlan',e:'mazlan@usm.my',r:''}]},
-  lkm400:{code:'LKM400',name:'Bahasa Malaysia',units:2,who:[{n:'Madam Mazlina',e:'mazlina@usm.my',r:''}]},
+  lsp201:{code:'LSP201',name:'General English I',units:2,who:[{n:'Sir Mazlan',e:'mazlan@usm.my',r:''},{n:'Ayuni Akhira (course coordinator)',e:'ayuni@usm.my',r:''}]},
+  lkm400:{code:'LKM400',name:'Bahasa Melayu IV',units:2,who:[{n:'Madam Mazlina Baharudin',e:'mazlina@usm.my',r:''}]},
   bengkel:{code:'Bengkel Siswa',name:'Student workshop (not a course)',who:[]}
 };
 var ORDER=['ckc111','cca101','cca102','she102'];
@@ -410,7 +410,7 @@ var TOPICS={
   ['Mid-semester break','brk'],
   ['Language and communication in Malaysia'],['Arts and cultural heritage'],
   ['Presentations','pres'],['Presentations','pres'],['Presentations','pres'],
-  ['Self-study','self'],['Self-study','self'],['No she102 sessions planned','none']]
+  ['Self-study','self'],['Self-study','self'],['No SHE102 sessions planned','none']]
 };
 var TASKS={
  ckc111:{def:['Skim the section and its definitions before the lecture','Rework the lecture examples without looking','Attempt a practice set: easy, then medium, then hard','Log each mistake and what caused it']},
@@ -451,6 +451,17 @@ var DEADLINES=[
  {course:'ckc111',title:'Test 2 (topics 9 to 13)',week:14,note:'Exact day not stated in the planner.'},
  {course:'ckc111',title:'Final exam (3 hours)',weeks:[17,19],note:'Exam weeks. The exact date is not in the planner yet.'},
  {course:'she102',title:'Presentations',weeks:[11,13],note:'Class slots on Tuesday 8, 15 and 22 December. Ask your lecturer when your turn is.'},
+ {course:'lkm400',title:'Oral presentation topic given',week:3,note:'Group presentation, but marks are given to each person.'},
+ {course:'lkm400',title:'Media review: film title given',week:7,note:'Watch the film and take notes before the test.'},
+ {course:'lkm400',title:'Oral presentations (30%)',weeks:[9,10],note:'Convocation falls in these weeks, so confirm your slot with your lecturer.'},
+ {course:'lkm400',title:'Media review test (15%, 45 minutes)',week:11},
+ {course:'lkm400',title:'Essay test (35%, 1 hour 30 minutes)',week:12},
+ {course:'lkm400',title:'Grammar test (20%, 1 hour)',week:15},
+ {course:'lsp201',title:'Speaking test (25%)',weeks:[11,15],note:'From week 11 onwards. Your group picks a topic and the teacher approves it a week before.'},
+ {course:'lsp201',title:'Reading test (25%)',week:12},
+ {course:'lsp201',title:'Writing test (25%)',week:12},
+ {course:'lsp201',title:'Listening test (25%, 60 minutes)',weeks:[13,15],note:'The teaching schedule says week 13 but the coursework table says week 15. Confirm with your lecturer.'},
+ {course:'all',title:'Public holiday for Deepavali (Monday)',date:'2026-11-09',kind:'hol',note:'Listed in the LSP201 planner. No Monday classes.'},
  {course:'all',title:'Deepavali (Sunday)',date:'2026-11-08',kind:'hol'},
  {course:'all',title:'Mid-semester break',week:8,kind:'hol'},
  {course:'all',title:'Convocation week',from:'2026-11-24',to:'2026-12-01',kind:'hol',note:'Listed in the CCA102 planner. Check whether classes still run.'},
@@ -467,7 +478,9 @@ var MARKS=[
  {course:'ckc111',exam:60,examTxt:'60% (3 hours)',cw:40,cwTxt:'Tests 2 \u00d7 15%, tutorial coursework 2 \u00d7 5%'},
  {course:'cca101',exam:50,examTxt:'50% (2 hours)',cw:50,cwTxt:'Programming 30% (weekly practice about 6%, two timed assessments about 16%, one report about 8%), tests 2 \u00d7 10%'},
  {course:'cca102',exam:50,examTxt:'50% (2 hours)',cw:50,cwTxt:'Tests 2 \u00d7 10%, assignments 2 \u00d7 15%'},
- {course:'she102',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Quiz 20%, test 20%, assignment 40%, presentation 20%'}
+ {course:'she102',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Quiz 20%, test 20%, assignment 40%, presentation 20%'},
+ {course:'lkm400',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Essay 35%, oral presentation 30%, grammar test 20%, media review 15%'},
+ {course:'lsp201',exam:0,examTxt:'No final exam',cw:100,cwTxt:'Listening 25%, reading 25%, writing 25%, speaking 25%'}
 ];
 
 var RULES=[
@@ -475,6 +488,9 @@ var RULES=[
  ['cca101','Missing three lectures or labs in a row without a reason can bar you from the final exam. Tests and timed assessments are in person only. Missing one scores 0 unless you hold an official medical certificate from Pusat Sejahtera, sent to both lecturers by the end of that day.'],
  ['she102','Attendance is mandatory and a warning letter follows more than three absences. Every submission goes through USM eLearning.'],
  ['ckc111','Reading assignments are given during the semester. Slides only appear on eLearning after each lecture is finished.'],
+ ['lkm400','Missing three classes in a row, or about six hours of teaching in total, earns a first warning letter. Ten hours brings a second and twelve a third, and you can be given an F. Email the lecturer with a reason before you miss a class.'],
+ ['lsp201','Warning notices come when you reach 30%, 60% and 90% absence of the contact hours without a valid reason or documents. After that the teacher can cut coursework marks, remove your eligibility for an assessment, or bar you from later ones.'],
+ ['lsp201','You need at least a C to pass, and a C is needed to move on to LSP301. If you do not get one, you repeat the course.'],
  ['all','Copying work, or letting yours be copied, is treated as plagiarism and can mean an F for the work or the whole coursework component.']
 ];
 
@@ -482,7 +498,9 @@ var HOW={
  ckc111:['This course has the largest study block because problem solving is learned by doing, not reading.','Before a lecture, skim the section headings and definitions for ten minutes.','On the same day, rework each lecture example without looking, then move to practice problems.','Attempt first, then use a hint, and only then read the full solution.','Keep an error log with a cause for each mistake: concept, calculation, notation, misread question. Revise from it before each test.','Tutorial coursework is 5% each. Start on the day it is released.'],
  cca101:['Programming is a skill you build with your hands, so type every example instead of reading it.','The 12 weekly practices add up to about 6%, and they are the training for the timed assessments.','Practise under a timer before each timed assessment. Write pseudocode first, then code.','Set up Lockdown Browser on your own laptop well before the first test on 3 November.','Use only what you learn in class. The policy bans vector, list, queue and other library containers.'],
  cca102:['Most of this course is diagrams, tables and conversions, so redraw them from memory.','Drill binary, decimal and hexadecimal conversions until they feel automatic.','Build the logic circuits from weeks 4 and 5 in a simulator instead of only reading them.','Use flashcards for terms and for the sequence of steps in fetch, decode, execute.','Assignments are worth 30% together. Read each brief the day it is released.'],
- she102:['There is no final exam, so the whole grade comes from steady coursework.','Read for about an hour a week and write short notes in your own words.','Choose your presentation topic by week 6, before the break, so you can research it over the holiday.','Submit through eLearning and keep your attendance clean.']
+ she102:['There is no final exam, so the whole grade comes from steady coursework.','Read for about an hour a week and write short notes in your own words.','Choose your presentation topic by week 6, before the break, so you can research it over the holiday.','Submit through eLearning and keep your attendance clean.'],
+ lkm400:['There is no final exam. Your grade comes from four pieces: essay 35%, oral presentation 30%, grammar test 20% and media review 15%.','Grammar is worth more than it looks. Nearly half of the essay marks and a big share of the presentation marks are for correct language, and the grammar test is its own 20%. Good grammar beats fancy ideas.','Essay (discussion type): 500 to 600 words in 1 hour 30 minutes. Pick agree, disagree, or both, and stick to it. Each point needs an explanation and an example. Going off topic caps you at 8 marks, so read the question twice.','Practise the essay under a timer, then check your own work for spelling, word choice, affixes (imbuhan) and sentence structure.','Grammar test: 10 sentences, 2 marks each, up to 8 mistakes per sentence. Rewrite the whole corrected sentence, not just the changed words. Work through the chapters in your weekly plan and fix the same four things every time.','Media review: you get a film in week 7. Watch it with a notebook and jot down characters and key scenes. In the test you write 200 to 250 words, with three body paragraphs only and no introduction or conclusion. Each paragraph needs a topic sentence, an explanation, an example naming a character, and a mini conclusion.','Oral presentation: you present in a group, but everyone is marked on their own. Grammar, standard pronunciation (sebutan baku) and fluency are worth more than content, so practise speaking in formal Malay, not casual talk. Make sure you speak enough, and prepare for questions.','Class is Wednesday at 8:00, so plan an earlier night on Tuesday. Attendance warnings start after three missed classes in a row.'],
+ lsp201:['There is no final exam. Four skills count 25% each: listening, reading, writing and speaking. A weak skill cannot hide, so give each one steady time.','The course aims at B1 high and your textbook is International Express: Intermediate. Units 1 to 5 are Making Connections, International Design, Future Lifestyles, Heritage, and Fashion and Function.','Listening (60 minutes): you get dialogues, talks and interviews, with multiple choice, gap fill, true or false and matching. Listen to English every day, such as podcasts or shows with English subtitles, and read the questions before the audio starts.','Reading: you find specific details and main ideas in straightforward texts. Practise by skimming first for the main idea, then hunting for the exact detail the question asks about.','Writing: you will practise emails (unit 3) and articles (unit 4). You are marked on content, how well you follow the task, organisation and language. Answer every part of the task, use linking words such as because, however and also, and check your tenses before you hand in.','Speaking: a group of four or five students discusses a topic for about 16 to 20 minutes while the teacher only listens. Pick a practical topic early, like planning a trip or a club event. Take turns, ask for clarification, agree and disagree politely, and finish with a decision. Do not dominate and do not stay silent.','Grammar to nail: present simple and continuous, past simple, present perfect, will, may and might, comparatives and superlatives, and modals like have to and must.','You need at least a C to pass and move on to LSP301, so aim for it from week 1.']
 };
 
 var RES={
@@ -726,7 +744,7 @@ function updateWeekCount(){
   if(c)c.textContent=boxes.length?done+' of '+boxes.length+' tasks done':'Nothing to tick this week';
 }
 function renderHow(){
-  document.getElementById('how').innerHTML=ORDER.map(function(c,i){
+  document.getElementById('how').innerHTML=ORDER.concat(EXTRA).filter(function(c){return HOW[c];}).map(function(c,i){
     return '<details class="how c-'+c+'"'+(i===0?' open':'')+'><summary>'+COURSES[c].code+' '+esc(COURSES[c].name)+'</summary><ul>'+HOW[c].map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></details>';
   }).join('');
 }

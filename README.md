@@ -28,7 +28,7 @@ The same credit is shown inside the page. Click the small `<.` button at the top
 - Added a credits box and a link to [myCSD](https://mycsd.javanmyna.fyi).
 - Replaced the footer with random quotes.
 
-The weekly plan, mark breakdown and resources still cover only the four courses that had planners: CKC111, CCA101, CCA102 and SHE103E. English and BM appear in the timetable and on the course cards only.
+The weekly plan and resources still cover only the four original courses: CKC111, CCA101, CCA102 and SHE102 (this fork uses SHE102 in place of SHE102). LKM400 (BM) and LSP201 (English) also have their marks, deadlines, attendance rules and study tips, but no week-by-week plan.
 
 ## Using it
 
