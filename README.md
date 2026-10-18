@@ -14,6 +14,8 @@ The same credit is shown inside the page. Click the small `<.` button at the top
 ## What the page does
 
 - **Timetable:** a weekly grid (and a day-by-day list on phones). Click a block to see its venue and notes. A "next class" strip at the top shows what is coming up.
+- **Timeline:** one scrollable list of every test, assignment and holiday, grouped by month, with time and venue shown. Two switches (off by default) add how many marks each is worth and how many days are left.
+- **Free time:** the gaps between your classes in a normal week, so you can see when you are really free.
 - **Weekly plan:** a checklist for each of the 16 weeks, with topics per course. Ticks are saved in your own browser only.
 - **Deadlines:** tests, assignments, holidays and the mark breakdown for each course, plus rules that can cost marks.
 - **Free resources:** free learning links for each course.

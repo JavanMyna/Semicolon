@@ -21,6 +21,7 @@
   --lsp201:#1F6FB8; --lsp201-t:#DCEBFA;
   --lkm400:#3E7D1E; --lkm400-t:#E1F0D2;
   --bengkel:#8C4A2F; --bengkel-t:#F3E3DA;
+  --free:#2E9E6B;
   --hour:52px;
   --display:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;
   --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -38,6 +39,7 @@
     --lsp201:#7DBBF5; --lsp201-t:#14293F;
     --lkm400:#A5D872; --lkm400-t:#1E3010;
     --bengkel:#DBA283; --bengkel-t:#34211A;
+    --free:#4CC38A;
   }
 }
 :root[data-theme="dark"]{
@@ -50,6 +52,7 @@
     --lsp201:#7DBBF5; --lsp201-t:#14293F;
     --lkm400:#A5D872; --lkm400-t:#1E3010;
     --bengkel:#DBA283; --bengkel-t:#34211A;
+    --free:#4CC38A;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
@@ -218,6 +221,39 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
 .foot blockquote{margin:0;font:600 1.1rem/1.45 var(--display)}
 .foot .by{margin:6px 0 0;font-size:.85rem;color:var(--muted)}
 .foot .again{margin-top:12px;font-size:.82rem;padding:6px 12px}
+/* timeline */
+.tl-scroll{position:relative;max-height:72vh;overflow-y:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 14px 14px;overscroll-behavior:contain}
+.tl-month{position:sticky;top:0;z-index:2;margin:0 -14px 12px;padding:12px 14px 8px;background:var(--surface);border-bottom:1px solid var(--line);font:800 1.25rem var(--display)}
+.tl-item{display:grid;grid-template-columns:64px 1fr;gap:12px;margin-bottom:10px}
+.tl-item.past{opacity:.5}
+.tl-date{text-align:center;line-height:1.15}
+.tl-date b{display:block;font:800 1.5rem var(--display)}
+.tl-date span{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.tl-date.rng b{font-size:.95rem}
+.tl-card{background:var(--t);border-left:4px solid var(--c);border-radius:8px;padding:8px 12px}
+.tl-card.hol{background:transparent;border:1.5px dashed var(--c);border-left-width:4px}
+.tl-card .cp{font-size:.74rem;font-weight:700;color:var(--c);margin-right:6px}
+.tl-card b{font-family:var(--display)}
+.tl-card .tv{display:block;font-size:.9rem;margin-top:2px}
+.tl-card .no{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
+.pill{display:inline-block;font-size:.74rem;font-weight:700;border-radius:99px;padding:1px 9px;margin:6px 6px 0 0;background:var(--ink);color:var(--bg)}
+.pill.soft{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.tl-now{display:flex;align-items:center;gap:10px;color:var(--now);font:700 .85rem var(--display);margin:6px 0 12px}
+.tl-now::before,.tl-now::after{content:"";flex:1;height:2px;background:var(--now)}
+/* free time */
+.fday{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.fday.today{border-color:var(--ink)}
+.fday h3{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.fday h3 small{font:500 .85rem var(--body);color:var(--muted)}
+.fbar{display:flex;height:14px;border-radius:99px;overflow:hidden;margin:8px 0 2px}
+.fbar i{display:block;height:100%}
+.fbar i.f{background:var(--free)}
+.fbar i.s{background:var(--line)}
+.fbar i.b{background:var(--c)}
+.fscale{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.fslots{list-style:none;margin:0;padding:0}
+.fslots li{display:flex;gap:10px;padding:2px 0;font-size:.92rem}
+.fslots span{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -239,6 +275,8 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
 
   <div class="tabs" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" id="t-timetable" aria-controls="p-timetable" aria-selected="true">Timetable</button>
+    <button class="tab" role="tab" id="t-timeline" aria-controls="p-timeline" aria-selected="false" tabindex="-1">Timeline</button>
+    <button class="tab" role="tab" id="t-free" aria-controls="p-free" aria-selected="false" tabindex="-1">Free time</button>
     <button class="tab" role="tab" id="t-week" aria-controls="p-week" aria-selected="false" tabindex="-1">Weekly plan</button>
     <button class="tab" role="tab" id="t-deadlines" aria-controls="p-deadlines" aria-selected="false" tabindex="-1">Deadlines</button>
     <button class="tab" role="tab" id="t-resources" aria-controls="p-resources" aria-selected="false" tabindex="-1">Free resources</button>
@@ -256,6 +294,29 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
     <div class="detail" id="detail" aria-live="polite"></div>
     <p class="legend">Solid blocks are classes. Dashed blocks are optional or suggested. Select a block for venue and notes. Classes with no time yet are listed under the grid.</p>
     <div class="courses" id="courses"></div>
+  </section>
+
+  <section id="p-timeline" role="tabpanel" aria-labelledby="t-timeline" hidden>
+    <h2>Timeline</h2>
+    <p class="lede">Tests, assignments and holidays in the order they happen. Scroll down for later months. Faded rows are done. A row with a date range means the exact day is not announced yet.</p>
+    <div class="controls">
+      <div class="chips" data-chips></div>
+      <label class="toggle"><input type="checkbox" id="tg-pts"> Show how many marks it is worth</label>
+      <label class="toggle"><input type="checkbox" id="tg-days"> Show days left</label>
+    </div>
+    <div class="tl-scroll" id="tl"></div>
+  </section>
+
+  <section id="p-free" role="tabpanel" aria-labelledby="t-free" hidden>
+    <h2>When you are really free</h2>
+    <p class="lede">The gaps between your classes in a normal week, from 8:00 to 21:00. The Tuesday common lab counts as free unless you tick it on the Timetable tab. Public holidays and test days are not subtracted.</p>
+    <div class="controls">
+      <label class="toggle">Only show gaps of at least
+        <select class="btn" id="fr-min" aria-label="Smallest gap to show"><option value="30">30 minutes</option><option value="60" selected>1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option></select>
+      </label>
+    </div>
+    <p class="lede" id="fr-sum"></p>
+    <div id="free"></div>
   </section>
 
   <section id="p-week" role="tabpanel" aria-labelledby="t-week" hidden>
@@ -310,6 +371,7 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
 (function(){
 'use strict';
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var MONFULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var DAYFULL=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 var HOUR=52, START_H=8, END_H=21;
@@ -428,39 +490,39 @@ var TASKSETS={
 
 /* deadlines: date, from/to, week, weeks */
 var DEADLINES=[
- {course:'cca101',title:'Test 1, 5:00 to 7:00 PM, DUP C',date:'2026-11-03',note:'A Tuesday, which is not a usual class day. In person only.'},
+ {course:'cca101',title:'Test 1',time:'5:00\u20137:00 PM',venue:'DUP C',pts:'10%',date:'2026-11-03',note:'A Tuesday, which is not a usual class day. In person only.'},
  {course:'cca101',title:'Report-based programming assessment released',date:'2026-11-10'},
- {course:'cca101',title:'Timed programming assessment 1, 5:00 to 7:00 PM, DUP C',date:'2026-11-10',note:'In person, on your own laptop with Lockdown Browser installed.'},
- {course:'cca101',title:'Report-based programming assessment due',date:'2026-12-13',note:'Late work needs prior approval and gets a penalty.'},
- {course:'cca101',title:'Test 2, 3:30 to 4:30 PM, DUP C',date:'2026-12-30'},
- {course:'cca101',title:'Timed programming assessment 2, 3:30 to 5:30 PM, DUP C',date:'2027-01-06'},
+ {course:'cca101',title:'Timed programming assessment 1',time:'5:00\u20137:00 PM',venue:'DUP C',pts:'about 8%',date:'2026-11-10',note:'In person, on your own laptop with Lockdown Browser installed.'},
+ {course:'cca101',title:'Report-based programming assessment due',pts:'about 8%',date:'2026-12-13',note:'Late work needs prior approval and gets a penalty.'},
+ {course:'cca101',title:'Test 2',time:'3:30\u20134:30 PM',venue:'DUP C',pts:'10%',date:'2026-12-30'},
+ {course:'cca101',title:'Timed programming assessment 2',time:'3:30\u20135:30 PM',venue:'DUP C',pts:'about 8%',date:'2027-01-06'},
  {course:'cca102',title:'Assignment 1 released',week:2},
- {course:'cca102',title:'Assignment 1 due',week:6},
+ {course:'cca102',title:'Assignment 1 due',pts:'15%',week:6},
   /* HIDDEN NOTE, please do not "fix" this: the CCA102 Test 1 date was changed from the original planner
      (which said 12 Nov 2026) to Thursday 5 Nov 2026, 8:30 to 9:30 AM, at DUP C (245 students).
      The lecturer and the students agreed on this, so 5 Nov is correct. */
-  {course:'cca102',title:'Test 1, 8:30 to 9:30 AM, DUP C',date:'2026-11-05'},
+  {course:'cca102',title:'Test 1',time:'8:30\u20139:30 AM',venue:'DUP C',pts:'10%',date:'2026-11-05'},
  {course:'cca102',title:'Assignment 2 released',week:10},
- {course:'cca102',title:'Assignment 2 due',week:14},
- {course:'cca102',title:'Test 2',week:15},
+ {course:'cca102',title:'Assignment 2 due',pts:'15%',week:14},
+ {course:'cca102',title:'Test 2',pts:'10%',week:15},
  {course:'ckc111',title:'Tutorial coursework 1 released',week:4},
- {course:'ckc111',title:'Tutorial coursework 1 due',week:6},
- {course:'ckc111',title:'Test 1 (topics 1 to 5)',week:7,note:'Exact day not stated in the planner.'},
+ {course:'ckc111',title:'Tutorial coursework 1 due',pts:'5%',week:6},
+ {course:'ckc111',title:'Test 1 (topics 1 to 5)',pts:'15%',week:7,note:'Exact day not stated in the planner.'},
  {course:'ckc111',title:'Tutorial coursework 2 released',week:10,note:'Covers topics up to week 12.'},
- {course:'ckc111',title:'Tutorial coursework 2 due',week:13},
- {course:'ckc111',title:'Test 2 (topics 9 to 13)',week:14,note:'Exact day not stated in the planner.'},
- {course:'ckc111',title:'Final exam (3 hours)',weeks:[17,19],note:'Exam weeks. The exact date is not in the planner yet.'},
- {course:'she102',title:'Presentations',weeks:[11,13],note:'Class slots on Tuesday 8, 15 and 22 December. Ask your lecturer when your turn is.'},
+ {course:'ckc111',title:'Tutorial coursework 2 due',pts:'5%',week:13},
+ {course:'ckc111',title:'Test 2 (topics 9 to 13)',pts:'15%',week:14,note:'Exact day not stated in the planner.'},
+ {course:'ckc111',title:'Final exam',time:'3 hours',pts:'60%',weeks:[17,19],note:'Exam weeks. The exact date is not in the planner yet.'},
+ {course:'she102',title:'Presentations',pts:'20%',weeks:[11,13],note:'Class slots on Tuesday 8, 15 and 22 December. Ask your lecturer when your turn is.'},
  {course:'lkm400',title:'Oral presentation topic given',week:3,note:'Group presentation, but marks are given to each person.'},
  {course:'lkm400',title:'Media review: film title given',week:7,note:'Watch the film and take notes before the test.'},
- {course:'lkm400',title:'Oral presentations (30%)',weeks:[9,10],note:'Convocation falls in these weeks, so confirm your slot with your lecturer.'},
- {course:'lkm400',title:'Media review test (15%, 45 minutes)',week:11},
- {course:'lkm400',title:'Essay test (35%, 1 hour 30 minutes)',week:12},
- {course:'lkm400',title:'Grammar test (20%, 1 hour)',week:15},
- {course:'lsp201',title:'Speaking test (25%)',weeks:[11,15],note:'From week 11 onwards. Your group picks a topic and the teacher approves it a week before.'},
- {course:'lsp201',title:'Reading test (25%)',week:12},
- {course:'lsp201',title:'Writing test (25%)',week:12},
- {course:'lsp201',title:'Listening test (25%, 60 minutes)',weeks:[13,15],note:'The teaching schedule says week 13 but the coursework table says week 15. Confirm with your lecturer.'},
+ {course:'lkm400',title:'Oral presentations',pts:'30%',weeks:[9,10],note:'Convocation falls in these weeks, so confirm your slot with your lecturer.'},
+ {course:'lkm400',title:'Media review test',time:'45 minutes',pts:'15%',week:11},
+ {course:'lkm400',title:'Essay test',time:'1 hour 30 minutes',pts:'35%',week:12},
+ {course:'lkm400',title:'Grammar test',time:'1 hour',pts:'20%',week:15},
+ {course:'lsp201',title:'Speaking test',pts:'25%',weeks:[11,15],note:'From week 11 onwards. Your group picks a topic and the teacher approves it a week before.'},
+ {course:'lsp201',title:'Reading test',pts:'25%',week:12},
+ {course:'lsp201',title:'Writing test',pts:'25%',week:12},
+ {course:'lsp201',title:'Listening test',time:'60 minutes',pts:'25%',weeks:[13,15],note:'The teaching schedule says week 13 but the coursework table says week 15. Confirm with your lecturer.'},
  {course:'all',title:'Public holiday for Deepavali (Monday)',date:'2026-11-09',kind:'hol',note:'Listed in the LSP201 planner. No Monday classes.'},
  {course:'all',title:'Deepavali (Sunday)',date:'2026-11-08',kind:'hol'},
  {course:'all',title:'Mid-semester break',week:8,kind:'hol'},
@@ -571,7 +633,7 @@ DEADLINES.forEach(function(it){
 DEADLINES.sort(function(a,b){return a.start-b.start||a.end-b.end;});
 
 /* ---------- state ---------- */
-var state={tab:'timetable',hidden:{},study:false,opt:false,sel:null,week:1};
+var state={tab:'timetable',hidden:{},study:false,opt:false,pts:false,days:false,fmin:60,sel:null,week:1};
 var progress={};
 try{progress=JSON.parse(localStorage.getItem('sem1-progress')||'{}')||{};}catch(e){progress={};}
 function saveProgress(){try{localStorage.setItem('sem1-progress',JSON.stringify(progress));}catch(e){}}
@@ -714,7 +776,7 @@ function renderWeek(){
   var dl=deadlinesForWeek(w);
   if(dl.length){
     html+='<div class="wkdead"><h3>Happening this week</h3><ul>'+dl.map(function(it){
-      return '<li><b>'+(it.course==='all'?'':COURSES[it.course].code+': ')+esc(it.title)+'</b>, '+esc(it.label)+(it.note?'<br><span class="muted">'+esc(it.note)+'</span>':'')+'</li>';
+      return '<li><b>'+(it.course==='all'?'':COURSES[it.course].code+': ')+esc(it.title)+'</b>, '+esc(it.label)+(tv(it)?', '+esc(tv(it)):'')+(it.note?'<br><span class="muted">'+esc(it.note)+'</span>':'')+'</li>';
     }).join('')+'</ul></div>';
   }
   html+='<div class="cards">';
@@ -776,7 +838,7 @@ function renderDeadlines(){
   DEADLINES.forEach(function(it){
     if(it.course!=='all'&&state.hidden[it.course])return;
     var r=relText(it),cls='c-'+it.course+(it.kind==='hol'?' hol':'')+(r.c?' '+r.c:'');
-    h+='<li class="'+cls+'"><div class="d">'+esc(it.label)+'</div><div class="ti">'+(it.course==='all'?'':'<span class="cp">'+COURSES[it.course].code+'</span>')+'<b>'+esc(it.title)+'</b>'+(it.note?'<span class="no">'+esc(it.note)+'</span>':'')+'</div><div class="r">'+r.t+'</div></li>';
+    h+='<li class="'+cls+'"><div class="d">'+esc(it.label)+'</div><div class="ti">'+(it.course==='all'?'':'<span class="cp">'+COURSES[it.course].code+'</span>')+'<b>'+esc(it.title)+'</b>'+(tv(it)?'<span class="no">'+esc(tv(it))+'</span>':'')+(it.note?'<span class="no">'+esc(it.note)+'</span>':'')+'</div><div class="r">'+r.t+'</div></li>';
   });
   document.getElementById('dl').innerHTML=h;
   var tb=TBC.filter(function(x){return !state.hidden[x.course];});
@@ -801,8 +863,62 @@ function renderRes(){
   }).join('');
 }
 
+/* ---------- timeline ---------- */
+function tv(it){var a=[];if(it.time)a.push(it.time);if(it.venue)a.push(it.venue);return a.join(' \u00b7 ');}
+var tlDone=false;
+function renderTimeline(){
+  var box=document.getElementById('tl'),st=box.scrollTop,today=sod(new Date()),html='',month=-1,placed=false;
+  var items=DEADLINES.filter(function(it){return it.course==='all'||!state.hidden[it.course];});
+  var now='<div class="tl-now" id="tl-now">Today, '+DAYS[dow(today)]+' '+fmt(today)+'</div>';
+  items.forEach(function(it){
+    var m=it.start.getFullYear()*12+it.start.getMonth(),rng=it.start.getTime()!==it.end.getTime(),r=relText(it);
+    if(!placed&&it.start>=today){html+=now;placed=true;}
+    if(m!==month){month=m;html+='<h3 class="tl-month">'+MONFULL[it.start.getMonth()]+' '+it.start.getFullYear()+'</h3>';}
+    var date=rng?'<div class="tl-date rng"><b>'+fmtRange(it.start,it.end)+'</b><span>'+(it.kind==='hol'?'Holiday':'Day not set')+'</span></div>':'<div class="tl-date"><b>'+it.start.getDate()+'</b><span>'+DAYS[dow(it.start)]+'</span></div>';
+    var days=r.t==='On now'&&!rng?'Today':r.t;
+    html+='<div class="tl-item c-'+it.course+(r.c==='past'?' past':'')+'">'+date+'<div class="tl-card'+(it.kind==='hol'?' hol':'')+'">'
+      +(it.course==='all'?'':'<span class="cp">'+COURSES[it.course].code+'</span>')+'<b>'+esc(it.title)+'</b>'
+      +(tv(it)?'<span class="tv">'+esc(tv(it))+'</span>':'')+(it.note?'<span class="no">'+esc(it.note)+'</span>':'')
+      +(state.pts&&it.pts?'<span class="pill soft">Worth '+esc(it.pts)+'</span>':'')+(state.days?'<span class="pill">'+esc(days)+'</span>':'')
+      +'</div></div>';
+  });
+  if(!placed)html+=now;
+  box.innerHTML=html;box.scrollTop=st;
+}
+function scrollTimelineNow(){
+  var box=document.getElementById('tl'),n=document.getElementById('tl-now');
+  if(tlDone||!n)return;box.scrollTop=Math.max(0,n.offsetTop-70);tlDone=true;
+}
+
+/* ---------- free time ---------- */
+function fm(m){return Math.floor(m/60)+':'+('0'+(m%60)).slice(-2);}
+function dur(m){var h=Math.floor(m/60),x=m%60;return (h?h+' h':'')+(h&&x?' ':'')+(x?x+' min':'');}
+function renderFree(){
+  var list=BLOCKS.filter(function(b){return b.kind!=='Study'&&!(b.opt&&!state.opt);});
+  var s0=START_H*60,e0=END_H*60,td=dow(new Date()),html='',week=0,d;
+  for(d=0;d<7;d++){
+    var items=list.filter(function(b){return b.day===d;}).sort(function(a,b){return mins(a.s)-mins(b.s);});
+    var cur=s0,segs=[],slots=[],total=0;
+    items.forEach(function(b){
+      var bs=Math.max(mins(b.s),s0),be=Math.min(mins(b.e),e0);
+      if(bs>cur){segs.push({f:1,n:bs-cur});slots.push([cur,bs]);}
+      if(be>cur){segs.push({c:b.course,n:be-Math.max(bs,cur)});cur=be;}
+    });
+    if(cur<e0){segs.push({f:1,n:e0-cur});slots.push([cur,e0]);}
+    slots=slots.filter(function(x){return x[1]-x[0]>=state.fmin;});
+    slots.forEach(function(x){total+=x[1]-x[0];});
+    if(d<5)week+=total;
+    html+='<div class="fday'+(d===td?' today':'')+'"><h3>'+DAYFULL[d]+'<small>'+(total?dur(total)+' free':'No free gap')+'</small></h3><div class="fbar">'
+      +segs.map(function(g){return g.f?'<i class="'+(g.n>=state.fmin?'f':'s')+'" style="flex:'+g.n+' 0 0"></i>':'<i class="b c-'+g.c+'" style="flex:'+g.n+' 0 0"></i>';}).join('')
+      +'</div><div class="fscale"><span>'+fm(s0)+'</span><span>'+fm(e0)+'</span></div><ul class="fslots">'
+      +(slots.length?slots.map(function(x){return '<li><b>'+fm(x[0])+'\u2013'+fm(x[1])+'</b><span>'+dur(x[1]-x[0])+'</span></li>';}).join(''):'<li><span>No gap this long</span></li>')+'</ul></div>';
+  }
+  document.getElementById('free').innerHTML=html;
+  document.getElementById('fr-sum').textContent='Monday to Friday: about '+dur(week)+' of free time in gaps of '+dur(state.fmin)+' or more. Green is free, coloured blocks are classes.';
+}
+
 /* ---------- tabs ---------- */
-var TABS=['timetable','week','deadlines','resources'];
+var TABS=['timetable','timeline','free','week','deadlines','resources'];
 function showTab(name,focus){
   state.tab=name;
   TABS.forEach(function(t){
@@ -811,6 +927,7 @@ function showTab(name,focus){
     document.getElementById('p-'+t).hidden=!on;
     if(on&&focus)tab.focus();
   });
+  if(name==='timeline')scrollTimelineNow();
 }
 
 /* ---------- events ---------- */
@@ -824,12 +941,15 @@ document.querySelector('.tabs').addEventListener('keydown',function(e){
 });
 document.addEventListener('click',function(e){
   var chip=e.target.closest('.chip');
-  if(chip){var c=chip.dataset.c;state.hidden[c]=!state.hidden[c];renderChips();renderTimetable();renderDeadlines();return;}
+  if(chip){var c=chip.dataset.c;state.hidden[c]=!state.hidden[c];renderChips();renderTimetable();renderDeadlines();renderTimeline();return;}
   var blk=e.target.closest('.blk');
   if(blk){state.sel=blk.dataset.id;renderGrid();renderDetail();var again=document.querySelector('.blk[data-id="'+state.sel+'"]');if(again)again.focus();}
 });
 document.getElementById('tg-study').addEventListener('change',function(e){state.study=e.target.checked;renderTimetable();});
-document.getElementById('tg-opt').addEventListener('change',function(e){state.opt=e.target.checked;renderTimetable();renderNext();});
+document.getElementById('tg-opt').addEventListener('change',function(e){state.opt=e.target.checked;renderTimetable();renderNext();renderFree();});
+document.getElementById('tg-pts').addEventListener('change',function(e){state.pts=e.target.checked;renderTimeline();});
+document.getElementById('tg-days').addEventListener('change',function(e){state.days=e.target.checked;renderTimeline();});
+document.getElementById('fr-min').addEventListener('change',function(e){state.fmin=+e.target.value;renderFree();});
 document.getElementById('wk-prev').addEventListener('click',function(){if(state.week>1){state.week--;renderWeek();}});
 document.getElementById('wk-next').addEventListener('click',function(){if(state.week<16){state.week++;renderWeek();}});
 document.getElementById('wk-now').addEventListener('click',function(){var w=curWeek();state.week=w<1?1:(w>16?16:w);renderWeek();});
@@ -906,11 +1026,11 @@ function initQuotes(){
 }
 
 /* ---------- init ---------- */
-document.getElementById('tg-opt').checked=state.opt;document.getElementById('tg-study').checked=state.study;
+document.getElementById('tg-opt').checked=state.opt;document.getElementById('tg-pts').checked=state.pts;document.getElementById('tg-days').checked=state.days;document.getElementById('fr-min').value=String(state.fmin);document.getElementById('tg-study').checked=state.study;
 initCredits();initQuotes();
 renderHeader();renderNext();renderChips();renderTimetable();renderCourses();
 initWeekSelect();renderWeek();renderHow();
-renderMarks();renderDeadlines();renderRules();renderRes();
+renderMarks();renderDeadlines();renderRules();renderRes();renderTimeline();renderFree();
 setInterval(function(){renderNext();if(state.tab==='timetable')renderGrid();},60000);
 })();
 </script>
