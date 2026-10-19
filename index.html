@@ -219,6 +219,10 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
 .credits-in p{margin:8px 0}
 .credits-in a{font-weight:600;color:var(--focus)}
 .credits-in .btn{margin-top:12px}
+button.mycsd{background:none;border:0;border-bottom:2px solid transparent;color:inherit;cursor:pointer}
+.bus-link{font-size:1.3rem;line-height:1;text-decoration:none;padding:6px 2px}
+.cs-links{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.cs-links .btn{display:block;text-align:center;text-decoration:none;color:var(--ink);font-weight:600;padding:12px 14px;margin-top:0}
 .untimed{margin-top:10px}
 .untimed:empty{display:none}
 .untimed div{border:1.5px dashed var(--c);border-left:4px solid var(--c);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:.88rem}
@@ -267,6 +271,8 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
 <body>
 <div class="wrap">
   <nav class="corner" aria-label="Links">
+    <button class="mycsd" id="cs-open" type="button" aria-haspopup="dialog">CS</button>
+    <a class="bus-link" href="https://usmbus.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="USM Bus" title="USM Bus">🚌</a>
     <a class="mycsd" href="https://mycsd.javanmyna.fyi" target="_blank" rel="noopener noreferrer">myCSD</a>
     <button class="credit-btn" id="credit-open" type="button" aria-haspopup="dialog" aria-label="Credits" title="Credits">&lt;.</button>
   </nav>
@@ -365,12 +371,23 @@ dialog.credits::backdrop{background:rgba(10,14,24,.55)}
   </footer>
 </div>
 
+<dialog class="credits" id="cs-menu" aria-labelledby="cs-title">
+  <div class="credits-in">
+    <h2 id="cs-title">CS</h2>
+    <div class="cs-links">
+      <a class="btn" href="https://csroadmap.javanmyna.fyi/" target="_blank" rel="noopener noreferrer">CS Roadmap</a>
+      <a class="btn" href="https://javanmyna.github.io/lecturerCS/" target="_blank" rel="noopener noreferrer">CS Lecturers</a>
+    </div>
+    <button class="btn" type="button" data-close>Close</button>
+  </div>
+</dialog>
+
 <dialog class="credits" id="credits" aria-labelledby="credits-title">
   <div class="credits-in">
     <h2 id="credits-title">Credits</h2>
     <p>This timetable and study plan was originally made by <a href="https://github.com/baswarahm" target="_blank" rel="noopener noreferrer">Baswara</a>.</p>
     <p class="muted">Forked from <a href="https://github.com/baswarahm/sms1" target="_blank" rel="noopener noreferrer">baswarahm/sms1</a>.</p>
-    <form method="dialog"><button class="btn">Close</button></form>
+    <button class="btn" type="button" data-close>Close</button>
   </div>
 </dialog>
 
@@ -967,11 +984,19 @@ document.getElementById('week').addEventListener('change',function(e){
   saveProgress();updateWeekCount();
 });
 
-/* ---------- credits ---------- */
+/* ---------- credits and CS menu ---------- */
 function initCredits(){
   var dlg=document.getElementById('credits');
   document.getElementById('credit-open').addEventListener('click',function(){if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');});
   dlg.addEventListener('click',function(e){if(e.target===dlg){if(dlg.close)dlg.close();else dlg.removeAttribute('open');}});
+
+  document.querySelectorAll('dialog [data-close]').forEach(function(b){
+    b.addEventListener('click',function(){var d=b.closest('dialog');if(d.close)d.close();else d.removeAttribute('open');});
+  });
+
+  var cs=document.getElementById('cs-menu');
+  document.getElementById('cs-open').addEventListener('click',function(){if(cs.showModal)cs.showModal();else cs.setAttribute('open','');});
+  cs.addEventListener('click',function(e){if(e.target===cs){if(cs.close)cs.close();else cs.removeAttribute('open');}});
 }
 
 /* ---------- footer quotes: a built-in pool, sometimes swapped for an online one ---------- */
