@@ -273,7 +273,7 @@ button.mycsd{background:none;border:0;border-bottom:2px solid transparent;color:
   <nav class="corner" aria-label="Links">
     <button class="mycsd" id="cs-open" type="button" aria-haspopup="dialog">CS</button>
     <a class="bus-link" href="https://usmbus.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="USM Bus" title="USM Bus">🚌</a>
-    <a class="mycsd" href="https://mycsd.javanmyna.fyi" target="_blank" rel="noopener noreferrer">myCSD</a>
+    <button class="mycsd" id="mycsd-open" type="button" aria-haspopup="dialog">myCSD</button>
     <button class="credit-btn" id="credit-open" type="button" aria-haspopup="dialog" aria-label="Credits" title="Credits">&lt;.</button>
   </nav>
   <header class="top">
@@ -370,6 +370,17 @@ button.mycsd{background:none;border:0;border-bottom:2px solid transparent;color:
     <button class="btn again" id="quote-new" type="button">Another one</button>
   </footer>
 </div>
+
+<dialog class="credits" id="mycsd-menu" aria-labelledby="mycsd-title">
+  <div class="credits-in">
+    <h2 id="mycsd-title">myCSD</h2>
+    <div class="cs-links">
+      <a class="btn" href="https://mycsd.javanmyna.fyi" target="_blank" rel="noopener noreferrer">myCSD tracker</a>
+      <a class="btn" href="https://javanmyna.github.io/whenCSD/" target="_blank" rel="noopener noreferrer">myCSD when?</a>
+    </div>
+    <button class="btn" type="button" data-close>Close</button>
+  </div>
+</dialog>
 
 <dialog class="credits" id="cs-menu" aria-labelledby="cs-title">
   <div class="credits-in">
@@ -997,6 +1008,10 @@ function initCredits(){
   var cs=document.getElementById('cs-menu');
   document.getElementById('cs-open').addEventListener('click',function(){if(cs.showModal)cs.showModal();else cs.setAttribute('open','');});
   cs.addEventListener('click',function(e){if(e.target===cs){if(cs.close)cs.close();else cs.removeAttribute('open');}});
+
+  var mc=document.getElementById('mycsd-menu');
+  document.getElementById('mycsd-open').addEventListener('click',function(){if(mc.showModal)mc.showModal();else mc.setAttribute('open','');});
+  mc.addEventListener('click',function(e){if(e.target===mc){if(mc.close)mc.close();else mc.removeAttribute('open');}});
 }
 
 /* ---------- footer quotes: a built-in pool, sometimes swapped for an online one ---------- */
